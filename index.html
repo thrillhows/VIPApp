@@ -2219,10 +2219,6 @@ function setup_timers()
     // vip timers
     //timer_reset_vip_w_long(0);
 
-    var dowOffset=document.getElementById("dowOffset");
-    dowAdjust=parseInt(dowOffset.value);
-
-
     timerLoop = setInterval(update_timers,1000);
 }
 function REparseCSV()
@@ -2595,6 +2591,11 @@ function update_timers()
         //console.log("time="+gtaTime+"\n");
 
         var dowOffset=2;
+
+        var dowAdjust=document.getElementById("dowOffset");
+        dowOffset=parseInt(dowAdjust.value);
+
+
         var gtaDOW=((gtaTime/1440)+dowOffset)%7;
         //console.log("gtaDOW="+gtaDOW+"\n");
 
@@ -2612,7 +2613,7 @@ function update_timers()
         var formattedTime=pad(parseInt(gtaHour))+":";
         formattedTime+=pad(parseInt(gtaMinute))+" ";
         gtaDOW=parseInt(gtaDOW);
-        formattedTime+=weekday[(gtaDOW+dowAdjust)%7];
+        formattedTime+=weekday[gtaDOW];
         timer_gtao.innerHTML= formattedTime;
         timer_gtao.textContent= formattedTime;
 
@@ -2890,7 +2891,7 @@ Version</a> of source code.</li>
 </ul>
 
 <br>
-Day Of Week Offset <input type="number" name="quantity" min="0" max="6" id="dowOffset" value="4">
+Day Of Week Offset <input type="number" name="quantity" min="0" max="6" id="dowOffset" value="0">
 
 <br>
 
